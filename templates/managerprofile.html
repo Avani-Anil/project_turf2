@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include 'sidebar2.html' %}
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <h3>PROFILE</h3>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>First Name</h6>
+                    <p class="text-muted">{{d.fname}}</p>
+                    <h6>Middle Name</h6>
+                    <p class="text-muted">{{d.mname}}</p>
+                    <h6>Last Name</h6>
+                    <p class="text-muted">{{d.lname}}</p>
+
+                  </div>
+                  
+                  <div class="col-6 mb-3">
+                    <h6>DOB</h6>
+                    <p class="text-muted">{{d.dob}}</p>
+                    <h6>Phone No</h6>
+                    <p class="text-muted">{{d.phoneno}}</p>
+                     <h6>Email</h6>
+                    <p class="text-muted">{{d.email}}</p>
+                  </div>
+                </div>
+
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>User Name</h6>
+                    <p class="text-muted">{{d.user}}</p>
+                  </div>
+
+                  <div class="col-6 mb-3">
+                     <a href="/passchangemanager" class="btn btn-primary btn-lg btn-block" style="width:90%;">Change Password</a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

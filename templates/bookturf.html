@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    body{
+    background-color: pink;
+    }
+   .container{
+        padding: 50px;
+        background-color: lightgreen;
+    }
+    input[type=text],input[type=email],input[type=date],input[type=time],textarea{
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+        background-color: white;
+        outline: none;
+    }
+
+    div{
+        padding: 10px 0;
+    }
+    hr{
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+    .bookbtn{
+        background-color: green;
+        color:white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 103%;
+        opacity: 0.9;
+     }
+     .bookbtn.hover{
+        opacity: 1;
+     }
+
+   </style>
+</head>
+<body>
+<div class="body-wrapper">
+
+<form action="/savebooking/" method="POST" >{%csrf_token%}
+
+<div class="container">
+
+    <center><h2>BOOK YOUR TURF</h2></center>
+    <hr>
+    <label>Your Name</label>
+     <input name="fname" type="text" value="{{s.fname}}" readonly><br>
+    <label>Contact</label>
+    <input name="contact" type="text" required><br>
+    <label>Email</label>
+    <input type="email" name="email"><br>
+    <label>Turf Name</label>
+    <input type="text" name="tname" placeholder="Turf Name" value="{{v.tname}}" readonly>
+     <label>Location</label>
+    <input type="text" name="loc" placeholder="Location" value="{{v.loc}}" readonly>
+     <label>Timings</label>
+    <input type="text" name="timing" placeholder="Timings" value="{{v.timing}}" readonly><br><br>
+     <label>Amenities</label>
+    <input type="text" name="amenities"  value="{{v.amenities}}" readonly><br>
+     <label>Enter your service</label>
+    <input type="text" name="services"><br>
+     <label>Booking Date</label>
+    <input name="bookdate" type="date" required><br>
+    <label> Turf Get In Time</label>
+   <input name="getin" type="time" required><br>
+     <label> Turf Get Out Time</label>
+   <input name="getout" type="time" required><br>
+<label>Sports Items Needed</label>
+    <select name="items" id="items">
+  <option value="yes">Yes</option>
+  <option value="no">No</option>
+</select>
+    <button type="submit" class="bookbtn">BOOK</button>
+
+
+</div>
+</form>
+
+</div>
+</body>
+</html>
+

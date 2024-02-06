@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    body{
+    background-color: pink;
+    }
+   .container{
+        padding: 50px;
+        background-color: lightgreen;
+    }
+    input[type=text],input[type=email],textarea{
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+        background-color: white;
+        outline: none;
+    }
+
+    div{
+        padding: 10px 0;
+    }
+    hr{
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+    .registerbtn{
+        background-color: green;
+        color:white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+     }
+     .registerbtn.hover{
+        opacity: 1;
+     }
+
+   </style>
+</head>
+<body>
+{% include 'sidebar2.html' %}
+<div class="body-wrapper">
+<form action="/saveturf/" method="POST" enctype="multipart/form-data">{%csrf_token%}
+<div class="container">
+
+    <center><h2>TURF REGISTRATION</h2></center>
+    <hr>
+    <label>Turf Name</label>
+    <input type="text" name="tname" placeholder="Turf Name">
+     <label>Location</label>
+    <input type="text" name="loc" placeholder="Location">
+     <label>Timings</label>
+    <input type="text" name="timing" placeholder="Timings"><br><br>
+    <label>Contact</label>
+    <input name="contact" type="text"><br>
+    <label>Email</label>
+    <input type="email" name="email"><br>
+    <label>Image</label>
+    <input type="file" name="image"><br><br>
+    <label>Services</label>
+   <input type="text" name="services">
+    Amenities:
+    <textarea cols="10" rows="5" placeholder="Amenities" value="amenities" name="amenities"></textarea>
+    <button type="submit" class="registerbtn">REGISTER</button>
+
+
+</div>
+</form>
+</div>
+</body>
+</html>
+

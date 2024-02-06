@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    body{
+    background-color: pink;
+    }
+   .container{
+        padding: 50px;
+        background-color: lightgreen;
+    }
+    input[type=text],input[type=date],input[type=email],input[type=password],textarea{
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+        background-color: white;
+        outline: none;
+    }
+
+    div{
+        padding: 10px 0;
+    }
+    hr{
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+    .registerbtn{
+        background-color: green;
+        color:white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+     }
+     .registerbtn.hover{
+        opacity: 1;
+     }
+
+   </style>
+</head>
+<body>
+<form action="/saveuser/" method="POST">{%csrf_token%}
+<div class="container">
+
+    <center><h2>NEW USER REGISTRATION</h2></center>
+    <hr>
+    <label>Name</label>
+    <input type="text" name="fname" placeholder="Enter Full Name">
+<div>
+        <label>Gender :</label><br><br>
+        <input type="radio" value="Male" name="gender">Male
+        <input type="radio" value="Female" name="gender">Female
+        <input type="radio" value="Other" name="gender">Other
+</div>
+    <label>DOB</label>
+    <input type="date" name="dob"><br>
+    <label>Phone No</label>
+    <input name="phoneno" type="text"><br>
+    <label>Email</label>
+    <input type="email" name="email"><br>
+    <label>User Name</label>
+    <input type="text" name="username"><br>
+    <label>Password</label>
+    <input type="password" name="password"><br>
+    <button type="submit" class="registerbtn">REGISTER</button>
+
+
+</div>
+</form>
+</body>
+</html>
+

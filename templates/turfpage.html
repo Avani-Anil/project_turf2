@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+table {
+ border-collapse: collapse;
+  width: 100%
+}
+tr,td,th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+h2 {
+text-align: center;
+}
+    </style>
+</head>
+<body>
+{% include 'sidebar2.html' %}
+ <div class="body-wrapper">
+<div  class="topnav">
+
+    <a href="/addturf" class="btn btn-custom">ADD TURF</a>
+
+</div>
+<h2>VIEW TURF</h2>
+<table>
+    <tr>
+        <th>TURF NAME</th>
+        <th>LOCATION</th>
+        <th>TIMINGS</th>
+        <th>CONTACT</th>
+        <th>EMAIL</th>
+         <th>IMAGE</th>
+        <th>SERVICES</th>
+        <th>AMENITIES</th>
+
+    </tr>
+     {%for i in v%}
+    <tr>
+        <td>{{i.tname}}</td>
+        <td>{{i.loc}}</td>
+        <td>{{i.timing}}</td>
+        <td>{{i.contact}}</td>
+        <td>{{i.email}}</td>
+        <td><img src="{{i.image}}" width="75px"></td>
+        <td>{{i.services}}</td>
+        <td>{{i.amenities}}</td>
+        <td> <a href="/editturf/{{i.id}}" class="btn btn-primary btn-lg btn-block" style="width:90%;">EDIT</a></td>
+        <td> <a href="/deleteturf/{{i.id}}" class="btn btn-primary btn-lg btn-block" style="width:90%;">DELETE</a></td>
+
+
+    </tr>
+    {%endfor%}
+</table>
+</body>
+</html>

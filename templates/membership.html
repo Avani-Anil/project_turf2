@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Membership Program</title>
+
+</head>
+<body>
+{% include 'sidebar.html' %}
+ <div class="body-wrapper">
+
+     <section>
+  <div class="row">
+      <div class="card" style="width: 300px; height: 100px;">
+  <img class="card-img-top" src="{% static 'asset/img/img_1.png' %}" alt="Card image cap" >
+  <div class="card-body">
+      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>Enjoy your Play time</strong></h3>
+
+    <center><a href="/basicmember" class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 75.00/Month</a></center>
+  </div>
+</div>
+<div class="card" style="width: 300px; height: 100px;">
+  <img class="card-img-top" src="{% static 'asset/img/img.png' %}" alt="Card image cap" >
+  <div class="card-body">
+      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>No Limit to Play</strong></h3>
+    <center><a href="/premiummember" class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 132.00/Month</a></center><br>
+  </div>
+</div>
+      <div class="card" style="width: 300px; height: 100px;">
+  <img class="card-img-top" src="{% static 'asset/img/img_2.png' %}" style="width: 75%" alt="Card image cap" >
+  <div class="card-body">
+      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>Unlimited Play</strong></h3>
+    <center><a href="/elitemember" class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 149.00/Month</a></center><br>
+  </div>
+</div>
+         </div>
+    </section>
+ </div>
+</body>
+</html>

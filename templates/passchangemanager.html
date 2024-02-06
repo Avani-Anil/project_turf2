@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+.topnav {
+  overflow: hidden;
+  background-color: green;
+}
+.changebtn{
+        background-color: green;
+        color:white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 50%;
+        opacity: 0.6;
+     }
+    </style>
+</head>
+<body>
+{% include 'sidebar2.html' %}
+<div class="body-wrapper">
+<form action="/updatepass/" method="POST">{%csrf_token%}
+    <div class="col-md-8">
+              <div class="card-body p-4">
+                <h3 style="color:green;">CHANGE PASSWORD</h3>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Old Password</h6>
+                    <p class="text-muted">{{p.password}}</p>
+                      <h6>Enter New Password</h6>
+                      <input type="password" name="password"><br><br>
+                      <button type="submit" class="changebtn">CHANGE</button>
+                  </div>
+                </div>
+              </div>
+    </div>
+</form>
+</div>
+</body>
+</html>

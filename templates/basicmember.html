@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include 'sidebar.html' %}
+ <div class="body-wrapper">
+
+     <section>
+  <div class="row">
+      <div class="card" style="width: 300px; height: 100px;">
+  <img class="card-img-top" src="{% static 'asset/img/img_1.png' %}" alt="Card image cap" >
+  <div class="card-body">
+      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>Enjoy your Play time</strong></h3>
+      <p> Standard Booking Access</p>
+      <p> Regular Booking Fees</p>
+      <p>Standard Customer Support</p>
+      <p>Standard Cancellation Policies</p>
+      <p>Facility Access</p>
+    <center><a class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 75.00/Month</a></center><br>
+       <center><a class="btn btn-info" style="width: 100%">YEARLY PLAN <br>Rs 529.00/Year</a></center>
+  </div>
+</div>
+  </div>
+</body>
+</html>

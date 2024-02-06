@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    body{
+    background-color: pink;
+    }
+   .container{
+        padding: 50px;
+        background-color: lightgreen;
+    }
+    input[type=text],input[type=date],input[type=email],textarea{
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+        background-color: white;
+        outline: none;
+    }
+
+    div{
+        padding: 10px 0;
+    }
+    hr{
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+    .updatebtn{
+        background-color: green;
+        color:white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+     }
+     .updatebtn.hover{
+        opacity: 1;
+     }
+
+   </style>
+</head>
+<body>
+{% include 'sidebar.html' %}
+<div class="body-wrapper">
+<form action="/updatemanager/{{e.id}}" method="POST">{%csrf_token%}
+<div class="container">
+
+    <center><h2>UPDATE MANAGER</h2></center>
+    <hr>
+    <label>First Name</label>
+    <input type="text" name="fname" placeholder="First Name" value="{{e.fname}}">
+     <label>Middle Name</label>
+    <input type="text" name="mname" placeholder="Middle Name" value="{{e.mname}}">
+     <label>Last Name</label>
+    <input type="text" name="lname" placeholder="Last Name" value="{{e.lname}}">
+<div>
+        <label>Gender :</label><br><br>
+        <input type="radio" value="{{e.gender}}" name="gender">Male
+        <input type="radio" value="{{e.gender}}" name="gender">Female
+        <input type="radio" value="{{e.gender}}" name="gender">Other
+</div>
+    <label>DOB</label>
+    <input type="date" name="dob" value="{{e.dob}}"><br>
+    <label>Phone No</label>
+    <input name="phoneno" type="text" value="{{e.phoneno}}"><br>
+    <label>Email</label>
+    <input type="email" name="email" value="{{e.email}}"><br>
+    <label>Basic Salary</label>
+    <input type="text" name="basicsal" value="{{e.basicsal}}"><br>
+    Current Address:
+    <textarea cols="80" rows="5" placeholder="Current Address" value="{{e.address}}" name="address"></textarea>
+    <label>User Name</label>
+    <input type="text" name="user" value="{{e.user}}"><br>
+    <button type="submit" class="updatebtn">UPDATE</button>
+
+
+</div>
+</form>
+</div>
+</body>
+</html>
+
