@@ -48,7 +48,11 @@ urlpatterns=[
     path("membership/", views.membership),
     path("basicmember/", views.basicmember),
     path("premiummember/", views.premiummember),
-    path("elitemember/", views.elitemember)
+    path("elitemember/", views.elitemember),
+    path("viewuser1/", views.viewuser1),
+    path("deleteuser1/<id>", views.deleteuser1),
+    path("adminturfview/", views.adminturfview),
+    path("admindeleteturf/<id>", views.admindeleteturf)
 
 
 ]

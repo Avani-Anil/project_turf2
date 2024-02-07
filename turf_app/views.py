@@ -101,6 +101,10 @@ def turfpage(request):
     v = turftbl.objects.all()
     return render(request,"turfpage.html",{"v":v})
 
+def adminturfview(request):
+    v = turftbl.objects.all()
+    return render(request,"adminturfview.html",{"v":v})
+
 def editturf(request, id):
     e = turftbl.objects.get(id=id)
     return render(request,"editturf.html", {"e": e})
@@ -146,6 +150,11 @@ def deleteturf(request, id):
     u.delete()
     return redirect("/turfpage/")
 
+def admindeleteturf(request, id):
+    u = turftbl.objects.get(id=id)
+    u.delete()
+    return redirect("/adminturfview/")
+
 def deletemanager(request, id):
     u = managertbl.objects.get(id=id)
     u.delete()
@@ -187,6 +196,14 @@ def deleteuser(request, id):
     u = usertbl.objects.get(id=id)
     u.delete()
     return redirect("/viewuser/")
+
+def viewuser1(request):
+    v = usertbl.objects.all()
+    return render(request,"viewuser1.html",{"v":v})
+def deleteuser1(request, id):
+    u = usertbl.objects.get(id=id)
+    u.delete()
+    return redirect("/viewuser1/")
 
 def userhomepage(request):
     v = turftbl.objects.all()[:3]
@@ -300,3 +317,4 @@ def elitemember(request):
 def managerviewbooking(request):
     v = bookingtbl.objects.all()
     return render(request,"managerviewbooking.html",{"v":v})
+
