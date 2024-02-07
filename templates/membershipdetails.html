@@ -1,10 +1,60 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+{% include 'sidebar2.html' %}
+ <div class="body-wrapper">
 
+     <section>
+  <div class="row">
+      <div class="card" style="width: 300px; height: 100px;">
+  <img class="card-img-top" src="{% static 'asset/img/img_1.png' %}" alt="Card image cap" >
+  <div class="card-body">
+      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>Enjoy your Play time</strong></h3>
+      <p> Standard Booking Access</p>
+      <p> Regular Booking Fees</p>
+      <p>Standard Customer Support</p>
+      <p>Standard Cancellation Policies</p>
+      <p>Facility Access</p>
+    <center><a class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 75.00/Month</a></center><br>
+       <center><a class="btn btn-info" style="width: 100%">YEARLY PLAN <br>Rs 529.00/Year</a></center>
+  </div>
+  </div>
+       <div class="card" style="width: 300px; height: 100px;">
+  <img class="card-img-top" src="{% static 'asset/img/img.png' %}" alt="Card image cap" >
+  <div class="card-body">
+      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>No Limit to Play</strong></h3>
+      <p>Priority Booking</p>
+      <p>Discounts</p>
+      <p>Exclusive Offers</p>
+      <p>Member Events</p>
+      <p>Flexible Cancellation</p>
+    <p>Dedicated Support</p>
+    <center><a class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 132.00/Month</a></center><br>
+       <center><a class="btn btn-info" style="width: 100%">YEARLY PLAN <br>Rs 925.00/Year</a></center>
+  </div>
+  </div>
+       <div class="card" style="width: 300px; height: 100px;">
+  <img class="card-img-top" src="{% static 'asset/img/img_2.png' %}" alt="Card image cap" >
+  <div class="card-body">
+      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>Unlimited Play</strong></h3>
+      <p>Enhanced Priority Booking</p>
+      <p>Exclusive Elite Discounts</p>
+      <p>Complimentary Upgrades</p>
+      <p>VIP Member Events</p>
+      <p>Elite Reward Programs</p>
+      <p>Flexible Cancellation Privileges</p>
+      <p>Priority Access to New Facilities</p>
+      <p>Special Elite Merchandise</p>
+    <center><a class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 149.00/Month</a></center><br>
+       <center><a class="btn btn-info" style="width: 100%">YEARLY PLAN <br>Rs 1499.00/Year</a></center>
+  </div>
+  </div>
+</div>
+  </div>
 </body>
 </html>

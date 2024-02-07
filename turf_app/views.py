@@ -314,6 +314,9 @@ def premiummember(request):
 def elitemember(request):
     return render(request, "elitemember.html")
 
+def membershipdetails(request):
+    return render(request, "membershipdetails.html")
+
 def managerviewbooking(request):
     v = bookingtbl.objects.all()
     return render(request,"managerviewbooking.html",{"v":v})
