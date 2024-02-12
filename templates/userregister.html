@@ -47,12 +47,27 @@
 </head>
 <body>
 <form action="/saveuser/" method="POST">{%csrf_token%}
+    {% if messages %}
+
+    {% for message in messages %}
+      <div class="alert alert-danger alert-dismissible" style="width:50%;float:right;">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>Sorry!</strong> {{message}}
+  </div>
+
+    {% endfor%}
+
+{%endif%}
 <div class="container">
 
     <center><h2>NEW USER REGISTRATION</h2></center>
     <hr>
-    <label>Name</label>
-    <input type="text" name="fname" placeholder="Enter Full Name">
+    <label>First Name</label>
+    <input type="text" name="fname" placeholder="Enter First Name">
+     <label>Middle Name</label>
+    <input type="text" name="mname" placeholder="Enter Middle Name">
+     <label>Last Name</label>
+    <input type="text" name="lname" placeholder="Enter Last Name">
 <div>
         <label>Gender :</label><br><br>
         <input type="radio" value="Male" name="gender">Male

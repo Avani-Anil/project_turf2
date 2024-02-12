@@ -56,7 +56,9 @@ text-align: center;
 <h2>VIEW USER</h2>
 <table>
     <tr>
-        <th>NAME</th>
+        <th>FIRST NAME</th>
+        <th>MIDDLE NAME</th>
+        <th>LAST NAME</th>
         <th>GENDER</th>
         <th>DOB</th>
         <th>PHONE NO</th>
@@ -65,6 +67,8 @@ text-align: center;
     {%for i in v%}
     <tr>
         <td>{{i.fname}}</td>
+        <td>{{i.mname}}</td>
+        <td>{{i.lname}}</td>
         <td>{{i.gender}}</td>
         <td>{{i.dob}}</td>
         <td>{{i.phoneno}}</td>

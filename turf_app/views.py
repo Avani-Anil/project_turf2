@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
@@ -7,6 +8,9 @@ from .models import *
 # Create your views here.
 def index(request):
     return render(request, "index.html")
+
+def termsofuse(request):
+    return render(request, "termsofuse.html")
 def adminturflogin(request):
     return render(request,"adminturflogin.html")
 
@@ -167,8 +171,15 @@ def userregister(request):
     return render(request, "userregister.html")
 
 def saveuser(request):
+    email = request.POST.get("email")
+    phoneno = request.POST.get("phoneno")
+    if usertbl.objects.filter(email=email, phoneno=phoneno).exists():
+        messages.error(request,"Email and Phone No already exists")
+        return redirect("/userregister/")
     s = usertbl()
     s.fname = request.POST.get("fname")
+    s.mname = request.POST.get("mname")
+    s.lname = request.POST.get("lname")
     s.gender = request.POST.get("gender")
     s.dob = request.POST.get("dob")
     s.phoneno = request.POST.get("phoneno")
@@ -220,6 +231,8 @@ def edituser(request, id):
 def updateuser(request, id):
     u = usertbl.objects.get(id=id)
     u.fname = request.POST.get("fname")
+    u.mname = request.POST.get("mname")
+    u.lname = request.POST.get("lname")
     u.gender = request.POST.get("gender")
     u.dob = request.POST.get("dob")
     u.phoneno = request.POST.get("phoneno")
@@ -250,6 +263,8 @@ def viewturf(request):
 def savebooking(request):
     s = bookingtbl()
     s.fname = request.POST.get("fname")
+    s.mname = request.POST.get("mname")
+    s.lname = request.POST.get("lname")
     s.contact = request.POST.get("contact")
     s.email = request.POST.get("email")
     s.tname = request.POST.get("tname")
@@ -259,16 +274,19 @@ def savebooking(request):
     s.getin = request.POST.get("getin")
     s.getout = request.POST.get("getout")
     s.items = request.POST.get("items")
+    s.user_id_id=request.session['i']
     s.save()
     return redirect("/userhomepage/")
 
 def viewbooking(request):
-    v = bookingtbl.objects.all()
+    v = bookingtbl.objects.filter(user_id=request.session['i'])
     return render(request,"viewbooking.html",{"v":v})
 
 def loadturfdetails(request):
     v = turftbl.objects.all()
     return render(request, "loadturfdetails.html", {"v": v})
+def usermembership(request):
+    return render(request, "usermembership.html")
 
 def search(request):
     s = request.POST.get("search")
@@ -304,15 +322,6 @@ def adminviewbooking(request):
 
 def membership(request):
     return render(request, "membership.html")
-
-def basicmember(request):
-    return render(request, "basicmember.html")
-
-def premiummember(request):
-    return render(request, "premiummember.html")
-
-def elitemember(request):
-    return render(request, "elitemember.html")
 
 def membershipdetails(request):
     return render(request, "membershipdetails.html")

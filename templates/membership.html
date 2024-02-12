@@ -9,34 +9,57 @@
 </head>
 <body>
 {% include 'sidebar.html' %}
- <div class="body-wrapper">
+ <div class="container" style=" margin: 100px 100px 100px 400px;">
+<div class="row">
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{% static 'asset/img/basic.png' %}" alt="Card image cap">
+  <div class="card-body">
+      <h5 class="card-title"><strong>Enjoy your Play Time</strong></h5>
+    <ul>
+                <li>Standard Booking Access</li>
+                <li>Limited Discounts</li>
+                <li>Seasonal Promotions</li>
+                <li>Basic Customer Support</li>
+                <li>Standard Cancellation Policies</li>
+              </ul>
+      <br>
+    <center><a href="#" class="btn btn-primary">₹ 75.00/Month</a></center>
+  </div>
+</div>
 
-     <section>
-  <div class="row">
-      <div class="card" style="width: 300px; height: 100px;">
-  <img class="card-img-top" src="{% static 'asset/img/img_1.png' %}" alt="Card image cap" >
+    <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{% static 'asset/img/premium.png' %}" alt="Card image cap">
   <div class="card-body">
-      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>Enjoy your Play time</strong></h3>
+      <h5 class="card-title"><strong><center>No Limit to Play</center></strong></h5>
+    <ul>
+                <li>Priority Booking</li>
+                <li>Discounts</li>
+                <li>Exclusive Offers</li>
+                <li>Member Events</li>
+                <li>Flexible Cancellation</li>
+              </ul>
+      <br>
+    <center><a href="#" class="btn btn-primary">₹ 132.00/Month </a></center>
+  </div>
+</div>
 
-    <center><a href="/basicmember" class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 75.00/Month</a></center>
-  </div>
-</div>
-<div class="card" style="width: 300px; height: 100px;">
-  <img class="card-img-top" src="{% static 'asset/img/img.png' %}" alt="Card image cap" >
+     <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{% static 'asset/img/elite.png' %}" alt="Card image cap">
   <div class="card-body">
-      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>No Limit to Play</strong></h3>
-    <center><a href="/premiummember" class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 132.00/Month</a></center><br>
+    <h5 class="card-title"><strong><center>Unlimited Play</center></strong></h5>
+    <ul>
+                <li>Enhanced Priority Booking</li>
+                <li>VIP Member Events</li>
+                <li>Elite Reward Programs</li>
+                <li>Exclusive Elite Discounts</li>
+                <li>Special Elite Merchandise</li>
+              </ul>
+      <br>
+    <center><a href="#" class="btn btn-primary">₹ 149.00/Month</a></center>
   </div>
 </div>
-      <div class="card" style="width: 300px; height: 100px;">
-  <img class="card-img-top" src="{% static 'asset/img/img_2.png' %}" style="width: 75%" alt="Card image cap" >
-  <div class="card-body">
-      <h3 class="card-title" style="text-align: center; color: #27BFF6;"><strong>Unlimited Play</strong></h3>
-    <center><a href="/elitemember" class="btn btn-info" style="width: 100%">MONTHLY PLAN <br>Rs 149.00/Month</a></center><br>
-  </div>
-</div>
-         </div>
-    </section>
+
+    </div>
  </div>
 </body>
 </html>

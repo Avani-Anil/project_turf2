@@ -3,6 +3,7 @@ from .import views
 
 urlpatterns=[
     path("",views.index),
+    path("termsofuse/", views.termsofuse),
     path("adminturflogin/", views.adminturflogin),
     path("adminlogcheck/", views.adminlogcheck),
     path("adminhomepage/", views.adminhomepage),
@@ -39,6 +40,7 @@ urlpatterns=[
     path("bookturf/<id>", views.bookturf),
     path("viewturf/", views.viewturf),
     path("savebooking/", views.savebooking),
+    path("usermembership/", views.usermembership),
     path("viewbooking/", views.viewbooking),
     path("loadturfdetails/", views.loadturfdetails),
     path("search/", views.search),
@@ -46,9 +48,6 @@ urlpatterns=[
     path("adminviewbooking/", views.adminviewbooking),
     path("managerviewbooking/", views.managerviewbooking),
     path("membership/", views.membership),
-    path("basicmember/", views.basicmember),
-    path("premiummember/", views.premiummember),
-    path("elitemember/", views.elitemember),
     path("membershipdetails/", views.membershipdetails),
     path("viewuser1/", views.viewuser1),
     path("deleteuser1/<id>", views.deleteuser1),

@@ -6,13 +6,13 @@ class managertbl(models.Model):
     fname = models.CharField(max_length=20, null=True)
     mname = models.CharField(max_length=20, null=True)
     lname = models.CharField(max_length=20, null=True)
-    gender = models.CharField(max_length=10, null=True)
+    gender = models.CharField(max_length=7, null=True)
     dob = models.DateField(null=True)
     phoneno = models.CharField(max_length=11, null=True)
     email = models.EmailField(null=True)
     basicsal = models.CharField(max_length=20, null=True)
     address = models.TextField(max_length=60,null=True)
-    user = models.CharField(max_length=20, null=True)
+    user = models.CharField(max_length=10, null=True)
     password = models.CharField(max_length=10, null=True)
 
 class turftbl(models.Model):
@@ -27,14 +27,17 @@ class turftbl(models.Model):
 
 class usertbl(models.Model):
     fname = models.CharField(max_length=20, null=True)
-    gender = models.CharField(max_length=10, null=True)
+    mname = models.CharField(max_length=20, null=True)
+    lname = models.CharField(max_length=20, null=True)
+    gender = models.CharField(max_length=7, null=True)
     dob = models.DateField(null=True)
     phoneno = models.CharField(max_length=11, null=True)
     email = models.EmailField(null=True)
-    username = models.CharField(max_length=20, null=True)
+    username = models.CharField(max_length=10, null=True)
     password = models.CharField(max_length=10, null=True)
 
 class bookingtbl(models.Model):
+    user_id=models.ForeignKey(usertbl,on_delete=models.CASCADE,null=True)
     fname = models.CharField(max_length=20, null=True)
     contact = models.CharField(max_length=11, null=True)
     email = models.EmailField(null=True)

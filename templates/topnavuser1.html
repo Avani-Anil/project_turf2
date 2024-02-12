@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
- <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Title</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -35,92 +35,30 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+
 <body>
- <!-- ======= Header ======= -->
+
+  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><img src="{% static 'asset/img/turflogo.jpeg' %}" height="100px">BOOK MY TURF</h1>
+        <h3><img src="{% static 'asset/img/turflogo.jpeg' %}" height="100px">BOOK MY TURF</h3>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="asset/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="/userhomepage">Home</a></li>
-          <li><a class="nav-link scrollto" href="/userprofile">Profile</a></li>
-          <li><a class="nav-link scrollto" href="/viewbooking">Bookings</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="/userlogin">LOGOUT</a></li>
+<ul>
+          <li><a class="getstarted scrollto" href="/userlogin">LOGIN</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
     </div>
   </header><!-- End Header -->
-<section class="vh-100" style="background-color: #f4f5f7;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-lg-6 mb-4 mb-lg-0">
-        <div class="card mb-3" style="border-radius: .5rem;">
-          <div class="row g-0">
-            <div class="col-md-4 gradient-custom text-center text-white"
-              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-              <h3>PROFILE</h3>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body p-4">
-                <h6>Information</h6>
-                <hr class="mt-0 mb-4">
-                <div class="row pt-1">
-                  <div class="col-6 mb-3">
-                    <h6> First Name</h6>
-                    <p class="text-muted">{{d.fname}}</p>
-                    <h6> Middle Name</h6>
-                    <p class="text-muted">{{d.mname}}</p>
-                    <h6> Last Name</h6>
-                    <p class="text-muted">{{d.lname}}</p>
-                    <h6>DOB</h6>
-                    <p class="text-muted">{{d.dob}}</p>
-                    <h6> Gender </h6>
-                    <p class="text-muted">{{d.gender}}</p>
-                  </div>
 
-                  <div class="col-6 mb-3">
-
-                    <h6>Phone No</h6>
-                    <p class="text-muted">{{d.phoneno}}</p>
-                     <h6>Email</h6>
-                    <p class="text-muted">{{d.email}}</p>
-                      <h6>User Name</h6>
-                    <p class="text-muted">{{d.username}}</p>
-                  </div>
-                </div>
-                <div class="col-6 mb-3">
-                     <a href="/edituser/{{d.id}}" class="btn btn-primary btn-lg btn-block" style="width:200%;">Edit Details</a>
-
-                  </div>
-
-                  <div class="col-6 mb-3">
-                  <a href="/passchangeuser" class="btn btn-primary btn-lg btn-block" style="width:200%;">Change Password</a>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <!-- ======= Footer ======= -->
+ <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <div class="row d-flex align-items-center">
@@ -161,5 +99,6 @@
 
   <!-- Template Main JS File -->
   <script src="{% static 'asset/js/main.js' %}"></script>
+
 </body>
 </html>
