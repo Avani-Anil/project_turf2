@@ -52,7 +52,10 @@ urlpatterns=[
     path("viewuser1/", views.viewuser1),
     path("deleteuser1/<id>", views.deleteuser1),
     path("adminturfview/", views.adminturfview),
-    path("admindeleteturf/<id>", views.admindeleteturf)
+    path("admindeleteturf/<id>", views.admindeleteturf),
+    path("reviewrating/", views.reviewrating),
+    path("viewrating/", views.viewrating),
+    path("saverating/", views.saverating)
 
 
 ]

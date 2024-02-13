@@ -37,7 +37,7 @@ class usertbl(models.Model):
     password = models.CharField(max_length=10, null=True)
 
 class bookingtbl(models.Model):
-    user_id=models.ForeignKey(usertbl,on_delete=models.CASCADE,null=True)
+    user_id = models.ForeignKey(usertbl,on_delete=models.CASCADE,null=True)
     fname = models.CharField(max_length=20, null=True)
     contact = models.CharField(max_length=11, null=True)
     email = models.EmailField(null=True)
@@ -52,6 +52,8 @@ class bookingtbl(models.Model):
     items = models.CharField(max_length=7, null=True)
 
 
-
+class reviewrating_tbl(models.Model):
+    user_id = models.ForeignKey(usertbl, on_delete=models.CASCADE, null=True)
+    reviews = models.CharField(max_length=40, null=True)
 
 
