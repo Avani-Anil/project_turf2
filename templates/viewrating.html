@@ -56,11 +56,14 @@ text-align: center;
 <h2>VIEW RATING</h2>
 <table>
     <tr>
-        <th>REVIEW</th>
+         <th>NAME</th>
+        <th>RATING</th>
     </tr>
     {%for i in v%}
     <tr>
-        <td>{{i.reviews}}</td>
+        <td>{{i.user_id.fname}}</td>
+        <td>{{i.rating}}</td>
+        <td> <a href="/deleterating/{{i.id}}" class="btn btn-primary btn-lg btn-block" style="width:40%;">DELETE</a></td>
 
     </tr>
     {%endfor%}

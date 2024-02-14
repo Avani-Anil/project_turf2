@@ -54,6 +54,8 @@ class bookingtbl(models.Model):
 
 class reviewrating_tbl(models.Model):
     user_id = models.ForeignKey(usertbl, on_delete=models.CASCADE, null=True)
-    reviews = models.CharField(max_length=40, null=True)
+    rating = models.CharField(max_length=15, null=True)
+
+
 
 

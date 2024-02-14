@@ -330,15 +330,25 @@ def managerviewbooking(request):
     v = bookingtbl.objects.all()
     return render(request,"managerviewbooking.html",{"v":v})
 
-def reviewrating(request):
-    return render(request, "reviewrating.html")
+def review (request):
+    return render(request, "review.html")
+
+def saverating(request):
+    s = reviewrating_tbl()
+    s.rating = request.POST.get("rating")
+    s.fname = request.POST.get("fname")
+    s.user_id_id = request.session['i']
+    s.save()
+    return redirect("/userhomepage/")
 
 def viewrating(request):
     v = reviewrating_tbl.objects.all()
     return render(request,"viewrating.html",{"v":v})
 
-def saverating(request):
-    s = reviewrating_tbl
-    s.reviews = request.POST.get("reviews")
-    s.user_id_id = request.session['i']
-    return redirect("/userhomepage/")
+def deleterating(request, id):
+    u = reviewrating_tbl.objects.get(id=id)
+    u.delete()
+    return redirect("/viewrating/")
+
+def turfreview(request):
+    return render(request,"turfreview.html")
