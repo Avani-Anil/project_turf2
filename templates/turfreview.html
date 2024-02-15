@@ -61,7 +61,7 @@
 
 <div class="container">
     <h1>Write a Review </h1>
-    <form action="/saverating/" method="POST">{%csrf_token%}
+    <form action="/saveturfrating/{{v.id}}" method="POST">{%csrf_token%}
         <label for="review">Your Review:</label>
         <textarea id="review" name="rating" rows="4" placeholder="Enter your review here..." required></textarea>
 

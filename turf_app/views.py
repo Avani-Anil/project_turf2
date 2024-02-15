@@ -350,5 +350,23 @@ def deleterating(request, id):
     u.delete()
     return redirect("/viewrating/")
 
-def turfreview(request):
-    return render(request,"turfreview.html")
+def turfreview(request,id):
+    v = turftbl.objects.get(id=id)
+    return render(request, "turfreview.html",{"v":v})
+def saveturfrating(request,id):
+    s = turfreview_tbl()
+    s.rating = request.POST.get("rating")
+    s.tname = request.POST.get("tname")
+    s.fname = request.POST.get("fname")
+    s.turf_id_id = id
+    s.user_id_id = request.session['i']
+    s.save()
+    return redirect("/userhomepage/")
+
+def viewturfrating(request):
+    v = turfreview_tbl.objects.all()
+    return render(request,"viewturfrating.html",{"v":v})
+
+def viewturfrating2(request):
+    v = turfreview_tbl.objects.all()
+    return render(request,"viewturfrating2.html",{"v":v})

@@ -56,6 +56,10 @@ class reviewrating_tbl(models.Model):
     user_id = models.ForeignKey(usertbl, on_delete=models.CASCADE, null=True)
     rating = models.CharField(max_length=15, null=True)
 
+class turfreview_tbl(models.Model):
+    user_id = models.ForeignKey(usertbl, on_delete=models.CASCADE, null=True)
+    turf_id = models.ForeignKey(turftbl, on_delete=models.CASCADE, null=True)
+    rating = models.CharField(max_length=15, null=True)
 
 
 

@@ -54,10 +54,14 @@ urlpatterns=[
     path("adminturfview/", views.adminturfview),
     path("admindeleteturf/<id>", views.admindeleteturf),
     path("review/", views.review),
-    path("viewrating/", views.viewrating),
     path("saverating/", views.saverating),
+    path("viewrating/", views.viewrating),
     path("deleterating/<id>", views.deleterating),
-    path("turfreview/", views.turfreview)
+    path("turfreview/<id>", views.turfreview),
+    path("saveturfrating/<id>", views.saveturfrating),
+    path("viewturfrating/", views.viewturfrating),
+    path("viewturfrating2/", views.viewturfrating)
+
 
 
 ]
