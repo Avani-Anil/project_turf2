@@ -60,7 +60,12 @@ urlpatterns=[
     path("turfreview/<id>", views.turfreview),
     path("saveturfrating/<id>", views.saveturfrating),
     path("viewturfrating/", views.viewturfrating),
-    path("viewturfrating2/", views.viewturfrating)
+    path("viewturfrating2/", views.viewturfrating2),
+    path("cancellation/", views.cancellation),
+    path("adminviewcancellation/", views.adminviewcancellation),
+    path("managerviewcancellation/", views.managerviewcancellation),
+    path("acceptterms/", views.acceptterms),
+    path("privacypolicy/",views.privacypolicy)
 
 
 

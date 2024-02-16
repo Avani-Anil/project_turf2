@@ -370,3 +370,18 @@ def viewturfrating(request):
 def viewturfrating2(request):
     v = turfreview_tbl.objects.all()
     return render(request,"viewturfrating2.html",{"v":v})
+
+def cancellation(request):
+    return render(request, "cancellation.html")
+
+def adminviewcancellation(request):
+    return render(request, "adminviewcancellation.html")
+
+def managerviewcancellation(request):
+    return render(request, "managerviewcancellation.html")
+
+def acceptterms(request):
+    return render(request, "acceptterms.html")
+
+def privacypolicy(request):
+    return render(request, "privacypolicy.html")

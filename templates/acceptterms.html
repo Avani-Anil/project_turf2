@@ -122,5 +122,15 @@ input[type="checkbox"] {
         <p>
             For inquiries related to the terms of use, please contact us at <a href="mailto:legal@bookmyturf.com">legal@bookmyturf.com</a>.
         </p>
+   <div class="accept-terms">
+            <input type="checkbox" id="acceptCheckbox">
+            <label for="acceptCheckbox">I accept the Terms of Use</label>
+        </div>
+
+        <button id="submitBtn" onclick="submitForm()">Submit</button>
+        <a href="/userregister" class="btn btn-success btn-lg btn-block">Go Back</a>
+    </section>
+
+    <script src="{% static 'asset/js/acceptscript.js'%}"></script>
 </body>
 </html>
