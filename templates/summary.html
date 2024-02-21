@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link href='https://fonts.googleapis.com/css?family=Red Hat Display' rel='stylesheet'>
+
+  <title>Frontend Mentor | Order summary card</title>
+
+  <style>
+    @media screen and (max-width:380px){
+      body {
+        background: url('./images/pattern-background-mobile.svg');
+        background-repeat: no-repeat;
+        background-color: rgb(224,232,255);
+    }
+    }
+   body{
+     background-color: rgb(224,232,255);
+     background-image: url("./images/pattern-background-desktop.svg");
+     background-repeat: repeat-x;
+   }
+   .box{
+     width: 340px;
+     max-width: 380px;
+     height: 410px;
+     background-color: white;
+     margin-left: auto;
+     margin-right: auto;
+     border-radius: 20px;
+     margin-top: 20px;
+   }
+   .first-text{
+     font-family: 'Red Hat Display';
+     font-weight: 900;
+     font-size: 1.7rem;
+     color: hsl(223, 47%, 23%);
+     text-align: center;
+   }
+   .second-text{
+     font-family: 'Red Hat Display';
+     font-weight: 700;
+     font-size: 16px;
+     color: hsl(224, 23%, 55%);
+     text-align: center;
+     margin-top: 2px;
+   }
+   .small-box{
+     width: 280px;
+     height: 70px;
+     background-color: hsl(225, 100%, 98%);
+     margin-right: auto;
+     margin-left: auto;
+     border-radius: 10px;
+     display: flex;
+   }
+   .payment{
+     margin-left:13px;
+     margin-top: 13px;
+   }
+   .change{
+     margin-left: 65px;
+     margin-top: 21px;
+     font-family: 'Red Hat Display';
+     font-weight:bold;
+     color: hsl(245, 75%, 52%);
+     text-decoration: underline;
+   }
+   .change:hover{
+    opacity: 0.7;
+    cursor: pointer;
+   }
+   .proceed{
+    width: 280px;
+     height: 40px;
+     margin: auto;
+     margin-top: 30px;
+     background-color: hsl(245, 75%, 52%);
+     color: white;
+     font-family: 'Red Hat Display';
+     border-radius: 10px;
+     text-align: center;
+     font-size: 14px;
+     line-height: 40px;
+   }
+   .proceed:hover{
+    box-shadow: 5px 10px 11px;
+    opacity: 0.9;
+    cursor: pointer;
+   }
+   .cancel{
+    font-family: 'Red Hat Display';
+     font-weight:bolder;
+     font-size: 14px;
+     color: hsl(224, 23%, 55%);
+     text-align: center;
+     margin-top: 20px;
+   }
+   .cancel:hover{
+    opacity: 0.7;
+    cursor: pointer;
+   }
+  </style>
+</head>
+<body>
+<main>
+  <div>
+    <div class="box">
+
+      <h1 class="first-text">Payment Summary</h1>
+      <h4 class="second-text">Book your turf, anywhere anytime</h4>
+        <div class="small-box">
+             <form id="pay" method="POST" action="/paymenthandler/">
+        {% csrf_token %}
+<div class="payment">
+  <div><label>Turf Name</label>
+    <input type="text" name="tname" placeholder="Turf Name" value="{{turf}}"><br><br>
+  <label>Booking Date</label>
+    <input name="bookdate" type="date" value="{{date}}" required><br><br>
+    <div><label> Turf Get In Time</label>
+   <input name="getin" type="time" required id="getin" value="{{getin}}"><br><br>
+     <label> Turf Get Out Time</label>
+   <input name="getout" type="time" required id="getout" value="{{getout}}"><br><br>
+       <label>Total Amount</label>
+    <input type="text" name="totalamt" value="{{amnt}}">
+</div>
+       <table>
+        <tr>
+         <td><input type="hidden" name="amount" value="{{amnt}}"></td>
+        </tr
+            <tr>
+
+        <input type="hidden" name="order_id" value="{{razorpay_order_id}}">
+            </tr>
+        <tr><input type="hidden" name="payment_id" value="{{payment_id}}"></tr>
+            <tr>
+        </div>
+        <div class="proceed"> <button class="btn pay" id="rzp-button1" type="submit" style="width:200px;">Pay Now</button></div>
+        <div class="cancel">Cancel Order</div>
+    </div>
+             </form>
+  </div>
+    </div>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+
+<script>
+    var options = {
+        "key": "{{ razorpay_merchant_key }}", // Enter the Key ID generated from the Dashboard
+        "amount": "{{ razorpay_amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "{{ currency }}",
+        "name": "test",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": "{{razorpay_order_id}}", //This is a sample Order ID. Pass the id obtained in the response of Step 1
+        "handler": function (response){
+            $('#pay input[name=payment_id]').val(response.razorpay_payment_id)
+            document.getElementById('pay').submit();
+        },
+        "prefill": {
+            "name": "",
+            "email": "vineethamonichan@gmail.com",
+            "contact": "7902955231"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "rgb(104,222,238)"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response){
+        $('#myModal').modal();
+    });
+    document.getElementById('rzp-button1').onclick = function(e){
+
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+</html>

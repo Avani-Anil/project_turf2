@@ -40,6 +40,7 @@ text-align: center;
         <th>GET IN</th>
         <th>GET OUT</th>
         <th>ITEMS</th>
+        <th>AMOUNT</th>
     </tr>
     {%for i in v%}
     <tr>
@@ -53,7 +54,8 @@ text-align: center;
         <td>{{i.getin}}</td>
         <td>{{i.getout}}</td>
         <td>{{i.items}}</td>
-        <td> <a href="/cancellation" class="btn btn-primary btn-lg btn-block" style="width:90%;">CANCEL</a></td>
+        <td>{{i.totalamt}}</td>
+        <td> <a href="/" class="btn btn-primary btn-lg btn-block" style="width:90%;">CANCEL</a></td>
 
     </tr>
     {%endfor%}

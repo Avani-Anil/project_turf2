@@ -24,6 +24,7 @@ class turftbl(models.Model):
     image = models.ImageField(null=True, upload_to='media')
     services = models.CharField(max_length=60, null=True)
     amenities = models.TextField(max_length=60, null=True)
+    amount = models.IntegerField(max_length=4, null=True)
 
 class usertbl(models.Model):
     fname = models.CharField(max_length=20, null=True)
@@ -50,6 +51,7 @@ class bookingtbl(models.Model):
     getin = models.TimeField(null=True)
     getout = models.TimeField(null=True)
     items = models.CharField(max_length=7, null=True)
+    totalamt = models.IntegerField(max_length=11,null=True)
 
 
 class reviewrating_tbl(models.Model):

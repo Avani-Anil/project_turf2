@@ -66,6 +66,8 @@
     <input type="email" name="email"><br>
     <label>Turf Name</label>
     <input type="text" name="tname" placeholder="Turf Name" value="{{v.tname}}" readonly>
+    <label>Amount</label>
+    <input name="amount" type="text" value="{{v.amount}}" readonly><br>
      <label>Location</label>
     <input type="text" name="loc" placeholder="Location" value="{{v.loc}}" readonly>
      <label>Timings</label>
@@ -77,14 +79,16 @@
      <label>Booking Date</label>
     <input name="bookdate" type="date" required><br>
     <label> Turf Get In Time</label>
-   <input name="getin" type="time" required><br>
+   <input name="getin" type="time" required id="getin"><br>
      <label> Turf Get Out Time</label>
-   <input name="getout" type="time" required><br>
+   <input name="getout" type="time" required id="getout"><br>
 <label>Sports Items Needed</label>
     <select name="items" id="items">
   <option value="yes">Yes</option>
   <option value="no">No</option>
-</select>
+</select><br><br>
+    <label>Total Amount</label>
+    <input type="text" name="totalamt" id="total">
     <button type="submit" class="bookbtn">BOOK</button>
 
 
@@ -92,6 +96,36 @@
 </form>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $('#getout').change(function(){
+    var go=$('#getout').val();
+
+    var gi=$('#getin').val();
+
+
+// Convert the time strings to Date objects
+var date1 = new Date("1970-01-01T" + go + ":00Z");
+var date2 = new Date("1970-01-01T" + gi + ":00Z");
+
+// Calculate the time difference in milliseconds
+var timeDifference = date1 - date2;
+
+// Convert the time difference back to hours and minutes
+var hours = Math.floor(timeDifference / (1000 * 60 * 60));
+var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+if(hours<1){
+alert("minimum one hour");
+}
+total=hours*{{v.amount}};
+min={{v.amount}}/60;
+total1=minutes*min;
+final=total+total1;
+$('#total').val(final);
+
+console.log("Time Difference: " + hours + " hours and " + minutes + " minutes");
+    });
+</script>
 </body>
 </html>
 

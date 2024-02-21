@@ -65,7 +65,9 @@ urlpatterns=[
     path("adminviewcancellation/", views.adminviewcancellation),
     path("managerviewcancellation/", views.managerviewcancellation),
     path("acceptterms/", views.acceptterms),
-    path("privacypolicy/",views.privacypolicy)
+    path("privacypolicy/",views.privacypolicy),
+    path("paymenthandler/",views.paymenthandler),
+    path("deletebooking/<id>", views.deletebooking)
 
 
 
