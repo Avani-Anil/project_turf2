@@ -504,7 +504,7 @@ def managerviewcancellation(request):
 
 
 def acceptterms(request):
-    return render(request, "acceptterms.html")
+    return render(request,"acceptterms.html")
 
 
 def privacypolicy(request):
