@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +10,6 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    border: 10px solid green;
-    border-radius: 40px;
 }
 
 header {
@@ -29,8 +28,7 @@ header {
     line-height: 1.6;
 }
 
-h1,h2{
-
+h1, h2 {
     color: #333;
 }
 
@@ -48,6 +46,7 @@ a {
   </style>
 </head>
 <body>
+{% include 'sidebar2.html' %}
     <header>
         <h1>Book My Turf - Privacy Policy</h1>
     </header>

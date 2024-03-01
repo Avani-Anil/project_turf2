@@ -510,6 +510,12 @@ def acceptterms(request):
 def privacypolicy(request):
     return render(request, "privacypolicy.html")
 
+def adminviewprivacy(request):
+    return render(request, "adminviewprivacy.html")
+
+def managerviewprivacy(request):
+    return render(request, "managerviewprivacy.html")
+
 def deletebooking(request, id):
     u = bookingtbl.objects.get(id=id)
     u.delete()
