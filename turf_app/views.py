@@ -2,7 +2,7 @@ import razorpay
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .models import *
 
@@ -395,14 +395,14 @@ def usermembership(request):
 
 def search(request):
     s = request.POST.get("search")
-    if turftbl.objects.filter(tname=s):
-        v = turftbl.objects.filter(tname=s)
+    if turftbl.objects.filter(tname__iexact=s):
+        v = turftbl.objects.filter(tname__iexact=s)
         return render(request, "viewturf.html", {"v": v})
-    elif turftbl.objects.filter(loc=s):
-        v = turftbl.objects.filter(loc=s)
+    elif turftbl.objects.filter(loc__iexact=s):
+        v = turftbl.objects.filter(loc__iexact=s)
         return render(request, "viewturf.html", {"v": v})
-    elif turftbl.objects.filter(services=s):
-        v = turftbl.objects.filter(services=s)
+    elif turftbl.objects.filter(services__iexact=s):
+        v = turftbl.objects.filter(services__iexact=s)
         return render(request, "viewturf.html", {"v": v})
     else:
         return HttpResponse("Invalid Data")
@@ -520,3 +520,17 @@ def deletebooking(request, id):
     u = bookingtbl.objects.get(id=id)
     u.delete()
     return redirect("/managerviewbooking/")
+
+def weather(request):
+    return render(request,"weather.html")
+
+def check_appointment(request):
+    data={}
+    get_in=request.GET.get("get_in")
+    b_date=request.GET.get("b_date")
+    print(b_date)
+    if bookingtbl.objects.filter(getin=get_in,bookdate=b_date).exists():
+        data["message"]="error"
+    else:
+        data['message']="success"
+    return JsonResponse(data)

@@ -80,7 +80,7 @@
      <label>Enter your service</label>
     <input type="text" name="services"><br>
      <label>Booking Date</label>
-    <input name="bookdate" type="date" required><br>
+    <input name="bookdate" type="date" id="b_date" required><br>
     <label> Turf Get In Time</label>
    <input name="getin" type="time" required id="getin"><br>
      <label> Turf Get Out Time</label>
@@ -103,6 +103,7 @@
 <script>
     $('#getout').change(function(){
     var go=$('#getout').val();
+    b_date=$('#b_date').val();
 
     var gi=$('#getin').val();
 
@@ -127,6 +128,18 @@ final=total+total1;
 $('#total').val(final);
 
 console.log("Time Difference: " + hours + " hours and " + minutes + " minutes");
+
+$.ajax({
+url:/check_appointment/,
+data:{'get_in':gi,'b_date':b_date},
+success:function(data){
+if(data['message']=="error")
+{
+alert("False");
+}
+}
+})
+
     });
 </script>
 </body>
