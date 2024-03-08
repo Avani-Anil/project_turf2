@@ -333,7 +333,7 @@ def savebooking(request):
     s.totalamt = request.POST.get("totalamt")
     s.save()
     currency = 'INR'
-    amount = int(s.totalamt) * 100
+    amount = int(s.totalamt) * 50
 
     razorpay_order = razorpay_client.order.create(dict(amount=amount, currency=currency, payment_capture='0'))
 
@@ -374,7 +374,7 @@ def paymenthandler(request):
     # verify the payment signature.
 
     print("res:")
-    amount = int(amount) * 100  # Rs. 200
+    amount = int(amount) * 50  # Rs. 200
     razorpay_client.payment.capture(payment_id, amount)
     return redirect("/userhomepage/")
 
@@ -410,14 +410,14 @@ def search(request):
 
 def search2(request):
     s = request.POST.get("search")
-    if turftbl.objects.filter(tname=s):
-        v = turftbl.objects.filter(tname=s)
+    if turftbl.objects.filter(tname__iexact=s):
+        v = turftbl.objects.filter(tname__iexact=s)
         return render(request, "loadturfdetails.html", {"v": v})
-    elif turftbl.objects.filter(loc=s):
-        v = turftbl.objects.filter(loc=s)
+    elif turftbl.objects.filter(loc__iexact=s):
+        v = turftbl.objects.filter(loc__iexact=s)
         return render(request, "loadturfdetails.html", {"v": v})
-    elif turftbl.objects.filter(services=s):
-        v = turftbl.objects.filter(services=s)
+    elif turftbl.objects.filter(services__iexact=s):
+        v = turftbl.objects.filter(services__iexact=s)
         return render(request, "loadturfdetails.html", {"v": v})
     else:
         return HttpResponse("Invalid Data")
