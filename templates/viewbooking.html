@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css" rel="stylesheet">
+
     <meta charset="UTF-8">
     <title>View Booking</title>
     <style>
@@ -28,7 +30,7 @@ text-align: center;
  <div class="body-wrapper">
 
 <h2>VIEW BOOKING</h2>
-<table style="width:100%">
+<table style="width:100%" id="booking">
     <tr>
         <th>NAME</th>
         <th>CONTACT</th>
@@ -56,11 +58,14 @@ text-align: center;
         <td>{{i.items}}</td>
         <td>{{i.totalamt}}</td>
         <td> <a href="/" class="btn btn-primary btn-lg btn-block" style="width:90%;">CANCEL</a></td>
+        <td> <a href="/generate_pdf" class="btn btn-primary btn-lg btn-block" style="width:70%;">Download PDF</a></td>
 
     </tr>
     {%endfor%}
 </table>
  </div>
+
+
 
 </body>
 </html>

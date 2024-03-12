@@ -18,6 +18,9 @@ class managertbl(models.Model):
 class turftbl(models.Model):
     tname = models.CharField(max_length=20, null=True)
     loc = models.CharField(max_length=50, null=True)
+    grass = models.CharField(max_length=10, null=True)
+    length = models.FloatField(null=True)
+    width = models.FloatField(null=True)
     timing = models.CharField(max_length=20, null=True)
     contact = models.IntegerField(null=True)
     email = models.EmailField(null=True)

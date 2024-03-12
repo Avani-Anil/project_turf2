@@ -1,9 +1,15 @@
 import razorpay
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.gis.db.backends.postgis import const
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
+from django.template.loader import get_template
+from django.template import Context
+from xhtml2pdf import pisa
+
+
 from .models import *
 
 
@@ -106,6 +112,9 @@ def saveturf(request):
     t = turftbl()
     t.tname = request.POST.get("tname")
     t.loc = request.POST.get("loc")
+    t.grass = request.POST.get("grass")
+    t.length = request.POST.get("length")
+    t.width = request.POST.get("width")
     t.timing = request.POST.get("timing")
     t.contact = request.POST.get("contact")
     t.email = request.POST.get("email")
@@ -140,6 +149,9 @@ def updateturf(request, id):
     u = turftbl.objects.get(id=id)
     u.tname = request.POST.get("tname")
     u.loc = request.POST.get("loc")
+    u.grass = request.POST.get("grass")
+    u.length = request.POST.get("length")
+    u.width = request.POST.get("width")
     u.timing = request.POST.get("timing")
     u.contact = request.POST.get("contact")
     u.email = request.POST.get("email")
@@ -333,7 +345,7 @@ def savebooking(request):
     s.totalamt = request.POST.get("totalamt")
     s.save()
     currency = 'INR'
-    amount = int(s.totalamt) * 50
+    amount = int(s.totalamt) * 100
 
     razorpay_order = razorpay_client.order.create(dict(amount=amount, currency=currency, payment_capture='0'))
 
@@ -374,7 +386,7 @@ def paymenthandler(request):
     # verify the payment signature.
 
     print("res:")
-    amount = int(amount) * 50  # Rs. 200
+    amount = int(amount) * 100  # Rs. 200
     razorpay_client.payment.capture(payment_id, amount)
     return redirect("/userhomepage/")
 
@@ -383,7 +395,24 @@ def viewbooking(request):
     v = bookingtbl.objects.filter(user_id=request.session['i'])
     return render(request, "viewbooking.html", {"v": v})
 
+def generate_pdf(request):
+        booking_data = {'user_name': 'John Doe', 'booking_date': '2024-03-15', 'start_time': '14:00',
+                        'end_time': '16:00'}
 
+        context = {'booking_data': booking_data}
+        template = get_template('viewbooking.html')
+        html_content = template.render(context)
+
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="booking_report.pdf"'
+
+        # Create PDF from HTML content
+        pisa_status = pisa.CreatePDF(html_content, dest=response)
+
+        if pisa_status.err:
+            return HttpResponse('Error generating PDF')
+
+        return response
 def loadturfdetails(request):
     v = turftbl.objects.all()
     return render(request, "loadturfdetails.html", {"v": v})
@@ -522,7 +551,10 @@ def deletebooking(request, id):
     return redirect("/managerviewbooking/")
 
 def weather(request):
-    return render(request,"weather.html")
+    return render(request, "weather.html")
+
+def livescore(request):
+    return render(request, "livescore.html")
 
 def check_appointment(request):
     data={}
@@ -534,3 +566,7 @@ def check_appointment(request):
     else:
         data['message']="success"
     return JsonResponse(data)
+
+def userview_review(request,id):
+    v = turfreview_tbl.objects.filter(turf_id=id).exclude(user_id=request.session['i'])
+    return render(request, "userview_review.html", {"v": v})

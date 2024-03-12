@@ -60,6 +60,18 @@
     <input type="text" name="tname" placeholder="Turf Name" value="{{e.tname}}">
      <label>Location</label>
     <input type="text" name="loc" placeholder="Location" value="{{e.loc}}">
+    <label>Type of Grass</label>
+    <select id="grass" name="grass" >
+    <option value="{{e.grass}}">{{e.grass}}</option>
+        <option value="nylon">Nylon</option>
+    <option value="polyethylene">Polyethylene</option>
+    <option value="polypropylene">Polypropylene</option>
+
+    </select><br><br>
+    <label>Length (in meters)</label>
+    <input type="text" name="length" value="{{e.length}}">
+    <label>Width (in meters)</label>
+    <input type="text" name="width" value="{{e.width}}">
      <label>Timings</label>
     <input type="text" name="timing" placeholder="Timings" value="{{e.timing}}"><br><br>
     <label>Contact</label>
@@ -68,8 +80,8 @@
     <input type="email" name="email" value="{{e.email}}"><br>
     <label>Image</label>
     <input type="file" name="image" value="{{e.image}}"><br><br>
-    Services:
-    <textarea cols="20" rows="5" placeholder="Services" value="services" name="services" value="{{e.services}}"></textarea>
+    <label>Services</label>
+    <input type="text" name="services" value="{{e.services}}">
     Amenities:
     <textarea cols="20" rows="5" placeholder="Amenities" value="amenities" name="amenities" value="{{e.amenities}}"></textarea>
     <label>Amount</label>

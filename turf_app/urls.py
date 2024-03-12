@@ -42,6 +42,7 @@ urlpatterns=[
     path("savebooking/", views.savebooking),
     path("usermembership/", views.usermembership),
     path("viewbooking/", views.viewbooking),
+    path("generate_pdf/", views.generate_pdf),
     path("loadturfdetails/", views.loadturfdetails),
     path("search/", views.search),
     path("search2/", views.search2),
@@ -71,7 +72,9 @@ urlpatterns=[
     path("paymenthandler/",views.paymenthandler),
     path("deletebooking/<id>", views.deletebooking),
     path("weather", views.weather),
-    path("check_appointment/",views.check_appointment)
+    path("livescore", views.livescore),
+    path("check_appointment/",views.check_appointment),
+    path("userview_review/<id>",views.userview_review)
 
 
 
