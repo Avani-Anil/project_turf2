@@ -53,6 +53,11 @@ text-align: center;
 <div  class="topnav">
 
 </div>
+     <form action="/searchuser/" method="POST">{%csrf_token%}
+         <div class="container">
+        <input type="text" name="searchuser" placeholder="Enter first name">
+<button class="btn btn-primary">Search </button><br><br>
+         </div></form>
 <h2>VIEW USER</h2>
 <table>
     <tr>
@@ -78,6 +83,7 @@ text-align: center;
     </tr>
     {%endfor%}
 </table>
+
  </div>
 </body>
 </html>

@@ -26,7 +26,11 @@ text-align: center;
 <body>
 {% include 'sidebar2.html' %}
  <div class="body-wrapper">
-
+<form action="/searchbooking/" method="POST">{%csrf_token%}
+         <div class="container">
+        <input type="text" name="searchbooking" placeholder="Enter name/turf name">
+        <button class="btn btn-primary">Search </button><br><br>
+         </div></form>
 <h2>VIEW BOOKING</h2>
 <table style="width:100%">
     <tr>

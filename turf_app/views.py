@@ -33,13 +33,17 @@ def adminlogcheck(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("/adminhomepage/")
+            return redirect("/admin_homepage/")
         else:
             return redirect("/adminturflogin/")
 
 
-def adminhomepage(request):
-    return render(request, "adminhomepage.html")
+def admin_homepage(request):
+    u = usertbl.objects.all().count()
+    t = turftbl.objects.all().count()
+    b = bookingtbl.objects.all().count()
+    v = bookingtbl.objects.all()[:4]
+    return render(request, "admin_homepage.html",{"v": v, "u": u, "t": t, "b": b})
 
 
 def viewmanager(request):
@@ -570,3 +574,33 @@ def check_appointment(request):
 def userview_review(request,id):
     v = turfreview_tbl.objects.filter(turf_id=id).exclude(user_id=request.session['i'])
     return render(request, "userview_review.html", {"v": v})
+
+def searchuser(request):
+    s = request.POST.get("searchuser")
+    if usertbl.objects.filter(fname__iexact=s):
+        v = usertbl.objects.filter(fname__iexact=s)
+        return render(request, "viewuser1.html", {"v": v})
+    else:
+        return HttpResponse("Invalid Data")
+
+def searchturf(request):
+    s = request.POST.get("searchturf")
+    if turftbl.objects.filter(tname__iexact=s):
+        v = turftbl.objects.filter(tname__iexact=s)
+        return render(request, "turfpage.html", {"v": v})
+    elif turftbl.objects.filter(loc__iexact=s):
+        v = turftbl.objects.filter(loc__iexact=s)
+        return render(request, "turfpage.html", {"v": v})
+    else:
+        return HttpResponse("Invalid Data")
+
+def searchbooking(request):
+    s = request.POST.get("searchbooking")
+    if bookingtbl.objects.filter(fname__iexact=s):
+        v = bookingtbl.objects.filter(fname__iexact=s)
+        return render(request, "managerviewbooking.html", {"v": v})
+    elif bookingtbl.objects.filter(tname__iexact=s):
+        v = bookingtbl.objects.filter(tname__iexact=s)
+        return render(request, "managerviewbooking.html", {"v": v})
+    else:
+        return HttpResponse("Invalid Data")
