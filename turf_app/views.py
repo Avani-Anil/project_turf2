@@ -2,8 +2,9 @@ import razorpay
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.gis.db.backends.postgis import const
+from django.contrib.sites import requests
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, request
 from django.shortcuts import render, redirect
 from django.template.loader import get_template
 from django.template import Context
@@ -82,13 +83,17 @@ def managerlogcheck(request):
     if managertbl.objects.filter(user=username, password=password).exists():
         v = managertbl.objects.get(user=username, password=password)
         request.session['i'] = v.id
-        return redirect("/managerhomepage/")
+        return redirect("/manager_homepage/")
     else:
         return HttpResponse('Invalid Data')
 
 
-def managerhomepage(request):
-    return render(request, "managerhomepage.html")
+def manager_homepage(request):
+    u = usertbl.objects.all().count()
+    t = turftbl.objects.all().count()
+    b = bookingtbl.objects.all().count()
+    v = bookingtbl.objects.all()[:4]
+    return render(request, "manager_homepage.html", {"v": v, "u": u, "t": t, "b": b})
 
 
 def managerprofile(request):
@@ -221,6 +226,21 @@ def userlogin(request):
 
 def userregister(request):
     return render(request, "userregister.html")
+
+
+def send_sms(phoneno):
+        # Make an HTTP request to your SMS API
+        api_key = '2f5f879c8emsh3c498feaddb2013p177f4bjsnd926154ca68b'
+        api_host = 'send-sms18.p.rapidapi.com'
+        message = 'Welcome to our website! Thank you for registering.'
+        response = request.POST.get(
+            'https://send-sms18.p.rapidapi.com/',
+            data={'api_key': api_key, 'api_host': api_host, 'phoneno': phoneno, 'message': message}
+        )
+        if response.status_code == 200:
+            return True
+        else:
+            return False
 
 
 def saveuser(request):
@@ -400,8 +420,7 @@ def viewbooking(request):
     return render(request, "viewbooking.html", {"v": v})
 
 def generate_pdf(request):
-        booking_data = {'user_name': 'John Doe', 'booking_date': '2024-03-15', 'start_time': '14:00',
-                        'end_time': '16:00'}
+        booking_data = bookingtbl.objects.filter(user_id=request.session['i'])
 
         context = {'booking_data': booking_data}
         template = get_template('viewbooking.html')
@@ -602,5 +621,13 @@ def searchbooking(request):
     elif bookingtbl.objects.filter(tname__iexact=s):
         v = bookingtbl.objects.filter(tname__iexact=s)
         return render(request, "managerviewbooking.html", {"v": v})
+    else:
+        return HttpResponse("Invalid Data")
+
+def searchmanager(request):
+    s = request.POST.get("searchmanager")
+    if managertbl.objects.filter(fname__iexact=s):
+        v = managertbl.objects.filter(fname__iexact=s)
+        return render(request, "viewmanager.html", {"v": v})
     else:
         return HttpResponse("Invalid Data")
