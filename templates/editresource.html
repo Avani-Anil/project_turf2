@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <style>
+    body{
+    background-color: pink;
+    }
+   .container{
+        padding-top: 10px;
+        padding-right: 350px;
+        padding-left: 350px;
+        background-color: 	#FFE4E1;
+        border-radius: 20px;
+    }
+    input[type=text],input[type=email],textarea{
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: 3px solid green;
+        border-radius: 12px;
+        background: #f1f1f1;
+        background-color: white;
+        outline: none;
+    }
+
+    div{
+        padding: 10px 0;
+    }
+    hr{
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+    .updatebtn{
+        background-color: green;
+        color:white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+     }
+     .updatebtn.hover{
+        opacity: 1;
+     }
+     </style>
+</head>
+<body>
+{% include 'sidebar2.html' %}
+ <div class="body-wrapper">
+     <form action="/updateresource/{{e.id}}" method="POST">{%csrf_token%}
+<div class="container">
+
+    <center><h2>UPDATE RESOURCE</h2></center>
+    <hr>
+    <label>Turf Name</label>
+    <input type="text" name="tname" placeholder="Turf Name" value="{{e.tname}}">
+    <label>Resource Name</label>
+    <input type="text" name="res_name" placeholder="Resource Name" value="{{e.res_name}}"><br>
+    <label>Total Number</label>
+    <input type="text" name="res_number" placeholder="Total Number" value="{{e.res_number}}"><br>
+    <button type="submit" class="updatebtn">UPDATE</button>
+
+
+</div>
+</form>
+ </div>
+</body>
+</html>

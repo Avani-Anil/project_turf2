@@ -54,7 +54,12 @@ text-align: center;
 
     <a href="/addmanager" class="btn btn-custom">ADD MANAGER</a>
 
-</div>
+</div><br><br>
+     <form action="/searchmanager/" method="POST">{%csrf_token%}
+         <div class="container">
+        <input type="text" name="searchmanager" placeholder="Enter first name">
+<button class="btn btn-primary">Search </button><br><br>
+         </div></form>
 <h2>VIEW MANAGER</h2>
 <table>
     <tr>

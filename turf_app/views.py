@@ -2,14 +2,13 @@ import razorpay
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.gis.db.backends.postgis import const
+from django.contrib.sites import requests
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, request
 from django.shortcuts import render, redirect
 from django.template.loader import get_template
 from django.template import Context
 from xhtml2pdf import pisa
-
-
 from .models import *
 
 
@@ -82,13 +81,17 @@ def managerlogcheck(request):
     if managertbl.objects.filter(user=username, password=password).exists():
         v = managertbl.objects.get(user=username, password=password)
         request.session['i'] = v.id
-        return redirect("/managerhomepage/")
+        return redirect("/manager_homepage/")
     else:
         return HttpResponse('Invalid Data')
 
 
-def managerhomepage(request):
-    return render(request, "managerhomepage.html")
+def manager_homepage(request):
+    u = usertbl.objects.all().count()
+    t = turftbl.objects.all().count()
+    b = bookingtbl.objects.all().count()
+    v = bookingtbl.objects.all()[:4]
+    return render(request, "manager_homepage.html", {"v": v, "u": u, "t": t, "b": b})
 
 
 def managerprofile(request):
@@ -116,6 +119,7 @@ def saveturf(request):
     t = turftbl()
     t.tname = request.POST.get("tname")
     t.loc = request.POST.get("loc")
+    t.district = request.POST.get("district")
     t.grass = request.POST.get("grass")
     t.length = request.POST.get("length")
     t.width = request.POST.get("width")
@@ -127,9 +131,11 @@ def saveturf(request):
     a = im.save(image.name, image)
     a1 = im.url(a)
     t.image = a1
-    t.services = request.POST.get("services")
+    t.sports = request.POST.get("sports")
     t.amenities = request.POST.get("amenities")
     t.amount = request.POST.get("amount")
+    t.res_name = request.POST.get("res_name")
+    t.res_number = request.POST.get("res_number")
     t.save()
     return redirect("/turfpage/")
 
@@ -137,7 +143,26 @@ def saveturf(request):
 def turfpage(request):
     v = turftbl.objects.all()
     return render(request, "turfpage.html", {"v": v})
+def addresource(request):
+    v = turftbl.objects.all()
+    return render(request, "addresource.html", {"v": v})
 
+
+def saveresource(request):
+    s = resource_tbl()
+    s.res_name = request.POST.get("res_name")
+    s.res_number = request.POST.get("res_number")
+    s.turf_id_id = request.POST.get("tname")
+    s.save()
+    return redirect("/resource/")
+
+def deleteresource(request, id):
+    u = resource_tbl.objects.get(id=id)
+    u.delete()
+    return redirect("/resource/")
+def resource(request):
+    v = resource_tbl.objects.all()
+    return render(request, "resource.html", {"v": v})
 
 def adminturfview(request):
     v = turftbl.objects.all()
@@ -153,13 +178,14 @@ def updateturf(request, id):
     u = turftbl.objects.get(id=id)
     u.tname = request.POST.get("tname")
     u.loc = request.POST.get("loc")
+    u.district = request.POST.get("district")
     u.grass = request.POST.get("grass")
     u.length = request.POST.get("length")
     u.width = request.POST.get("width")
     u.timing = request.POST.get("timing")
     u.contact = request.POST.get("contact")
     u.email = request.POST.get("email")
-    u.services = request.POST.get("services")
+    u.sports = request.POST.get("sports")
     u.amenities = request.POST.get("amenities")
     u.amount = request.POST.get("amount")
     u.save()
@@ -175,6 +201,17 @@ def updateturf(request, id):
 
     return redirect("/turfpage/")
 
+def editresource(request,id):
+    e = resource_tbl.objects.get(id=id)
+    return render(request, "editresource.html", {"e": e})
+
+def updateresource(request,id):
+    ur = resource_tbl.objects.get(id=id)
+    ur.tname = request.POST.get("tname")
+    ur.res_name = request.POST.get("res_name")
+    ur.res_number = request.POST.get("res_number")
+    ur.save()
+    return redirect("/resource/")
 
 def editmanager(request, id):
     e = managertbl.objects.get(id=id)
@@ -223,6 +260,21 @@ def userregister(request):
     return render(request, "userregister.html")
 
 
+def send_sms(phoneno):
+        # Make an HTTP request to your SMS API
+        api_key = '2f5f879c8emsh3c498feaddb2013p177f4bjsnd926154ca68b'
+        api_host = 'send-sms18.p.rapidapi.com'
+        message = 'Welcome to our website! Thank you for registering.'
+        response = requests.post(
+            'https://send-sms18.p.rapidapi.com/',
+            data={'api_key': api_key, 'api_host': api_host, 'phoneno': phoneno, 'message': message}
+        )
+        if response.status_code == 200:
+            return True
+        else:
+            return False
+
+
 def saveuser(request):
     email = request.POST.get("email")
     phoneno = request.POST.get("phoneno")
@@ -233,6 +285,7 @@ def saveuser(request):
     s.fname = request.POST.get("fname")
     s.mname = request.POST.get("mname")
     s.lname = request.POST.get("lname")
+    s.district = request.POST.get("district")
     s.gender = request.POST.get("gender")
     s.dob = request.POST.get("dob")
     s.phoneno = request.POST.get("phoneno")
@@ -277,7 +330,8 @@ def deleteuser1(request, id):
 
 
 def userhomepage(request):
-    v = turftbl.objects.all()[:3]
+    a = usertbl.objects.get(id=request.session['i'])
+    v = turftbl.objects.filter(district=a.district)[:3]
     return render(request, "userhomepage.html", {"v": v})
 
 
@@ -296,6 +350,7 @@ def updateuser(request, id):
     u.fname = request.POST.get("fname")
     u.mname = request.POST.get("mname")
     u.lname = request.POST.get("lname")
+    u.district = request.POST.get("district")
     u.gender = request.POST.get("gender")
     u.dob = request.POST.get("dob")
     u.phoneno = request.POST.get("phoneno")
@@ -340,7 +395,7 @@ def savebooking(request):
     s.email = request.POST.get("email")
     s.tname = request.POST.get("tname")
     s.loc = request.POST.get("loc")
-    s.services = request.POST.get("services")
+    s.sports = request.POST.get("sports")
     s.bookdate = request.POST.get("bookdate")
     s.getin = request.POST.get("getin")
     s.getout = request.POST.get("getout")
@@ -400,8 +455,7 @@ def viewbooking(request):
     return render(request, "viewbooking.html", {"v": v})
 
 def generate_pdf(request):
-        booking_data = {'user_name': 'John Doe', 'booking_date': '2024-03-15', 'start_time': '14:00',
-                        'end_time': '16:00'}
+        booking_data = bookingtbl.objects.filter(user_id=request.session['i'])
 
         context = {'booking_data': booking_data}
         template = get_template('viewbooking.html')
@@ -418,7 +472,8 @@ def generate_pdf(request):
 
         return response
 def loadturfdetails(request):
-    v = turftbl.objects.all()
+    a = usertbl.objects.get(id=request.session['i'])
+    v = turftbl.objects.filter(district=a.district)[:3]
     return render(request, "loadturfdetails.html", {"v": v})
 
 
@@ -434,8 +489,8 @@ def search(request):
     elif turftbl.objects.filter(loc__iexact=s):
         v = turftbl.objects.filter(loc__iexact=s)
         return render(request, "viewturf.html", {"v": v})
-    elif turftbl.objects.filter(services__iexact=s):
-        v = turftbl.objects.filter(services__iexact=s)
+    elif turftbl.objects.filter(sports__iexact=s):
+        v = turftbl.objects.filter(sports__iexact=s)
         return render(request, "viewturf.html", {"v": v})
     else:
         return HttpResponse("Invalid Data")
@@ -449,8 +504,8 @@ def search2(request):
     elif turftbl.objects.filter(loc__iexact=s):
         v = turftbl.objects.filter(loc__iexact=s)
         return render(request, "loadturfdetails.html", {"v": v})
-    elif turftbl.objects.filter(services__iexact=s):
-        v = turftbl.objects.filter(services__iexact=s)
+    elif turftbl.objects.filter(sports__iexact=s):
+        v = turftbl.objects.filter(sports__iexact=s)
         return render(request, "loadturfdetails.html", {"v": v})
     else:
         return HttpResponse("Invalid Data")
@@ -493,9 +548,9 @@ def viewrating(request):
 
 
 def deleterating(request, id):
-    u = reviewrating_tbl.objects.get(id=id)
+    u = turfreview_tbl.objects.get(id=id)
     u.delete()
-    return redirect("/viewrating/")
+    return redirect("/viewturfrating/")
 
 
 def turfreview(request, id):
@@ -506,6 +561,7 @@ def turfreview(request, id):
 def saveturfrating(request, id):
     s = turfreview_tbl()
     s.rating = request.POST.get("rating")
+    s.review = request.POST.get("review")
     s.tname = request.POST.get("tname")
     s.fname = request.POST.get("fname")
     s.turf_id_id = id
@@ -604,3 +660,12 @@ def searchbooking(request):
         return render(request, "managerviewbooking.html", {"v": v})
     else:
         return HttpResponse("Invalid Data")
+
+def searchmanager(request):
+    s = request.POST.get("searchmanager")
+    if managertbl.objects.filter(fname__iexact=s):
+        v = managertbl.objects.filter(fname__iexact=s)
+        return render(request, "viewmanager.html", {"v": v})
+    else:
+        return HttpResponse("Invalid Data")
+
