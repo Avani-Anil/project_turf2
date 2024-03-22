@@ -78,8 +78,13 @@ urlpatterns=[
     path("weather", views.weather),
     path("livescore", views.livescore),
     path("check_appointment/",views.check_appointment),
-    path("userview_review/<id>",views.userview_review)
-
+    path("userview_review/<id>",views.userview_review),
+    path("resource/",views.resource),
+    path("addresource/", views.addresource),
+    path("saveresource/", views.saveresource),
+    path("editresource/<id>", views.editresource),
+    path("updateresource/<id>", views.updateresource),
+    path("deleteresource/<id>", views.deleteresource)
 
 
 ]
