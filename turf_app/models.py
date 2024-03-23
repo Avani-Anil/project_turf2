@@ -28,7 +28,13 @@ class turftbl(models.Model):
     image = models.ImageField(null=True, upload_to='media')
     sports = models.CharField(max_length=60, null=True)
     amenities = models.TextField(max_length=60, null=True)
-    amount = models.IntegerField(max_length=4, null=True)
+    amount = models.IntegerField( null=True)
+
+class resource_tbl(models.Model):
+    turf_id = models.ForeignKey(turftbl, on_delete=models.CASCADE, null=True)
+    res_name = models.CharField(max_length=10, null=True)
+    res_number = models.IntegerField(null=True)
+
 
 class usertbl(models.Model):
     fname = models.CharField(max_length=20, null=True)
@@ -45,13 +51,10 @@ class usertbl(models.Model):
 class bookingtbl(models.Model):
     user_id = models.ForeignKey(usertbl,on_delete=models.CASCADE,null=True)
     fname = models.CharField(max_length=20, null=True)
-    contact = models.IntegerField(null=True)
-    email = models.EmailField(null=True)
-    tname = models.CharField(max_length=20, null=True)
-    loc = models.CharField(max_length=50, null=True)
-    timing = models.CharField(max_length=20, null=True)
-    amenities = models.TextField(max_length=60, null=True)
-    services = models.CharField(max_length=60, null=True)
+    tname = models.CharField(max_length=20,null=True)
+    loc = models.CharField(max_length=15, null=True)
+    timing = models.CharField(max_length=6, null=True)
+    sports = models.CharField(max_length=6, null=True)
     bookdate = models.DateField(null=True)
     getin = models.TimeField(null=True)
     getout = models.TimeField(null=True)
@@ -61,7 +64,7 @@ class bookingtbl(models.Model):
 
 class reviewrating_tbl(models.Model):
     user_id = models.ForeignKey(usertbl, on_delete=models.CASCADE, null=True)
-    rating = models.CharField(max_length=15, null=True)
+    review = models.CharField(max_length=15, null=True)
 
 class turfreview_tbl(models.Model):
     user_id = models.ForeignKey(usertbl, on_delete=models.CASCADE, null=True)
@@ -69,8 +72,4 @@ class turfreview_tbl(models.Model):
     rating = models.IntegerField(null=True)
     review = models.CharField(max_length=15, null=True)
 
-class resource_tbl(models.Model):
-    turf_id = models.ForeignKey(turftbl, on_delete=models.CASCADE, null=True)
-    res_name = models.CharField(max_length=10, null=True)
-    res_number = models.IntegerField(null=True)
 

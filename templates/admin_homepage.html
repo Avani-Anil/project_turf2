@@ -592,18 +592,16 @@ nav.close ~ .dashboard .top{
                     <table style="width:100%" id="booking" class="table table-bordered">
     <tr>
         <th><center>NAME</center></th>
-        <th><center>EMAIL</center></th>
         <th><center>TURF NAME</center></th>
-        <th><center>SERVICES</center></th>
+        <th><center>SPORTS</center></th>
         <th><center>DATE</center></th>
         <th><center>AMOUNT</center></th>
     </tr>
     {%for i in v%}
     <tr>
         <td><center>{{i.fname}}</center></td>
-        <td><center>{{i.email}}</center></td>
         <td><center>{{i.tname}}</center></td>
-        <td><center>{{i.services}}</center></td>
+        <td><center>{{i.sports}}</center></td>
         <td><center>{{i.bookdate}}</center></td>
         <td><center>{{i.totalamt}}</center></td>
 

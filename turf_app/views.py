@@ -389,12 +389,9 @@ razorpay_client = razorpay.Client(auth=('rzp_test_G0D8VXQvuP0UIb', 'ade6yjh3z1b8
 def savebooking(request):
     s = bookingtbl()
     s.fname = request.POST.get("fname")
-    s.mname = request.POST.get("mname")
-    s.lname = request.POST.get("lname")
-    s.contact = request.POST.get("contact")
-    s.email = request.POST.get("email")
     s.tname = request.POST.get("tname")
     s.loc = request.POST.get("loc")
+    s.timing = request.POST.get("timing")
     s.sports = request.POST.get("sports")
     s.bookdate = request.POST.get("bookdate")
     s.getin = request.POST.get("getin")
